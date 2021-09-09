@@ -1,6 +1,8 @@
 // All the DOM selectors stored as short variables
 const chat = document.getElementById('chat')
 const startButton = document.getElementById('start-btn')
+const form = document.getElementById('name-form')
+const inputValue = document.getElementById('name-input')
 
 
 // Global variables, if you need any, declared here
@@ -37,10 +39,32 @@ const showMessage = (message, sender) => {
 const greeting = () => {
   showMessage(`Hello there, What's your name?`, 'bot')
   // Just to check it out, change 'bot' to 'user' here 👆
+
+}
+
+const ageQuestion = () => {
+  showMessage('How old are you?', 'bot')
+}
+
+const handleNameInput = (event) => {
+  event.preventDefault()
+
+  const name = inputValue.value
+
+
+
+  console.log('The name is:', name)
+  showMessage (`My name is ${name}`, 'user')
+//note the difference between the single quotation in row 48 vs. the bacticks in 49.
+  inputValue.value = ''
+
+  setTimeout(ageQuestion, 1000)
+
 }
 
 // Set up your eventlisteners here
 startButton.addEventListener('click', greeting)
+form.addEventListener('submit', handleNameInput)
 
 // When website loaded, chatbot asks first question.
 // normally we would invoke a function like this:
@@ -48,4 +72,4 @@ startButton.addEventListener('click', greeting)
 // But if we want to add a little delay to it, we can wrap it in a setTimeout:
 // setTimeout(functionName, timeToWaitInMilliSeconds)
 // This means the greeting function will be called one second after the website is loaded.
-//setTimeout(greeting, 1000)
+// setTimeout(greeting, 1000)
